@@ -16,8 +16,8 @@ public class SiskinWebConfig {
 
         Properties properties = new Properties();
         try {
-            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(System.getenv("SISKIN_HOME/conf")));
-//            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("siskin-web.properties"));
+//            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(System.getenv("SISKIN_HOME/conf")));
+            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("siskin-web.properties"));
 
             JAR_PATH = properties.getProperty("JAR_PATH");
             FLINK_REST_URL = properties.getProperty("FLINK_REST_URL");
