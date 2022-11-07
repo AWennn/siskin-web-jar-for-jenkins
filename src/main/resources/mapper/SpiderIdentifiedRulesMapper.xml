@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siskin.mapper.SpiderIdentifiedRulesMapper">
+    <resultMap id="SpiderResultMap" type="com.siskin.entity.SpiderIdentifiedRules">
+        <result column="sir_id" jdbcType="INTEGER" property="sir_id"/>
+        <result column="identified_rules" jdbcType="VARCHAR" property="identified_rules"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="start_time"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="end_time"/>
+    </resultMap>
+    <select id="getSpider" resultMap="SpiderResultMap">
+        select * from spider_identified_rules;
+    </select>
+    <resultMap id="SpiderByIdResultMap" type="com.siskin.entity.SpiderIdentifiedRules">
+        <result column="sir_id" jdbcType="INTEGER" property="sir_id"/>
+        <result column="identified_rules" jdbcType="VARCHAR" property="identified_rules"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="start_time"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="end_time"/>
+    </resultMap>
+    <select id="getSpiderById" resultMap="SpiderByIdResultMap">
+        select * from spider_identified_rules where sir_id=#{sir_id};
+    </select>
+    <parameterMap id="SpiderSetResultMap" type="com.siskin.entity.SpiderIdentifiedRules">
+        <parameter jdbcType="INTEGER" property="sir_id"/>
+        <parameter jdbcType="VARCHAR" property="identified_rules"/>
+        <parameter jdbcType="TIMESTAMP" property="start_time"/>
+        <parameter jdbcType="TIMESTAMP" property="end_time"/>
+    </parameterMap>
+    <insert id="setSpider" parameterMap="SpiderSetResultMap">
+        insert into spider_identified_rules(identified_rules,start_time,end_time)values(#{identified_rules},#{start_time},#{end_time});
+    </insert>
+    <parameterMap id="SpiderUpdateResultMap" type="com.siskin.entity.SpiderIdentifiedRules">
+        <parameter jdbcType="INTEGER" property="sir_id"/>
+        <parameter jdbcType="VARCHAR" property="identified_rules"/>
+        <parameter jdbcType="TIMESTAMP" property="start_time"/>
+        <parameter jdbcType="TIMESTAMP" property="end_time"/>
+    </parameterMap>
+    <update id="updateSpider" parameterMap="SpiderUpdateResultMap">
+        update spider_identified_rules set identified_rules=#{identified_rules},start_time=#{start_time},end_time=#{end_time} where sir_id=#{sir_id};
+    </update>
+    <parameterMap id="SpiderDeleteResultMap" type="com.siskin.entity.SpiderIdentifiedRules">
+        <parameter jdbcType="INTEGER" property="sir_id"/>
+        <parameter jdbcType="VARCHAR" property="identified_rules"/>
+        <parameter jdbcType="TIMESTAMP" property="start_time"/>
+        <parameter jdbcType="TIMESTAMP" property="end_time"/>
+    </parameterMap>
+    <delete id="deleteSpider" parameterMap="SpiderDeleteResultMap">
+        delete from spider_identified_rules where sir_id=#{sir_id};
+    </delete>
+</mapper>

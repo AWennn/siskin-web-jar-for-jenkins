@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siskin.mapper.RegexEncryptRulesMapper">
+    <resultMap id="EncryptResultMap" type="com.siskin.entity.RegexEncryptRules">
+        <result column="rer_id" jdbcType="INTEGER" property="rer_id"/>
+        <result column="field_name" jdbcType="VARCHAR" property="field_name"/>
+        <result column="encrypt_method" jdbcType="VARCHAR" property="encrypt_method"/>
+    </resultMap>
+    <select id="getEncrypt" resultMap="EncryptResultMap">
+        select * from regex_encrypt_rules;
+    </select>
+    <resultMap id="EncryptByIdResultMap" type="com.siskin.entity.RegexEncryptRules">
+        <result column="rer_id" jdbcType="INTEGER" property="rer_id"/>
+        <result column="field_name" jdbcType="VARCHAR" property="field_name"/>
+        <result column="encrypt_method" jdbcType="VARCHAR" property="encrypt_method"/>
+    </resultMap>
+    <select id="getEncryptById" resultMap="EncryptByIdResultMap">
+        select * from regex_encrypt_rules where rer_id=#{rer_id};
+    </select>
+    <parameterMap id="EncryptSetResultMap" type="com.siskin.entity.RegexEncryptRules">
+        <parameter property="rer_id" jdbcType="INTEGER"/>
+        <parameter property="field_name" jdbcType="VARCHAR"/>
+        <parameter property="encrypt_method" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <insert id="setEncrypt" parameterType="com.siskin.entity.RegexEncryptRules">
+        insert into regex_encrypt_rules(field_name,encrypt_method)values(#{field_name},#{encrypt_method});
+    </insert>
+    <parameterMap id="EncryptUpdateResultMap" type="com.siskin.entity.RegexEncryptRules">
+        <parameter property="rer_id" jdbcType="INTEGER"/>
+        <parameter property="field_name" jdbcType="VARCHAR"/>
+        <parameter property="encrypt_method" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <update id="updateEncrypt" parameterMap="EncryptUpdateResultMap">
+        update regex_encrypt_rules set field_name=#{field_name},encrypt_method=#{encrypt_method} where rer_id=#{rer_id};
+    </update>
+    <parameterMap id="EncryptDeleteResultMap" type="com.siskin.entity.RegexEncryptRules">
+        <parameter property="rer_id" jdbcType="INTEGER"/>
+        <parameter property="field_name" jdbcType="VARCHAR"/>
+        <parameter property="encrypt_method" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <delete id="deleteEncrypt" parameterMap="EncryptDeleteResultMap">
+        delete from regex_encrypt_rules where rer_id=#{rer_id};
+    </delete>
+
+</mapper>

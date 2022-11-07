@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siskin.mapper.RegexFilterRulesMapper">
+    <resultMap id="FilterResultMap" type="com.siskin.entity.RegexFilterRules">
+        <result column="rfr_id" jdbcType="INTEGER" property="rfr_id"/>
+        <result column="field_name" jdbcType="VARCHAR" property="field_name"/>
+        <result column="regex_rule" jdbcType="VARCHAR" property="regex_rule"/>
+    </resultMap>
+    <select id="getFilter" resultMap="FilterResultMap">
+        select * from regex_filter_rules;
+    </select>
+    <resultMap id="FilterByIdResultMap" type="com.siskin.entity.RegexFilterRules">
+        <result column="rfr_id" jdbcType="INTEGER" property="rfr_id"/>
+        <result column="field_name" jdbcType="VARCHAR" property="field_name"/>
+        <result column="regex_rule" jdbcType="VARCHAR" property="regex_rule"/>
+    </resultMap>
+    <select id="getFilterById" resultMap="FilterByIdResultMap">
+        select * from regex_filter_rules where rfr_id=#{rfr_id};
+    </select>
+    <parameterMap id="FilterSetResultMap" type="com.siskin.entity.RegexFilterRules">
+        <parameter property="rfr_id" jdbcType="INTEGER"/>
+        <parameter property="field_name" jdbcType="VARCHAR"/>
+        <parameter property="regex_rule" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <insert id="setFilter" parameterType="com.siskin.entity.RegexFilterRules">
+        insert into regex_filter_rules(field_name,regex_rule)values(#{field_name},#{regex_rule});
+    </insert>
+    <parameterMap id="FilterUpdateResultMap" type="com.siskin.entity.RegexFilterRules">
+        <parameter property="rfr_id" jdbcType="INTEGER"/>
+        <parameter property="field_name" jdbcType="VARCHAR"/>
+        <parameter property="regex_rule" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <update id="updateFilter" parameterMap="FilterUpdateResultMap">
+        update regex_filter_rules set field_name=#{field_name},regex_rule=#{regex_rule} where rfr_id=#{rfr_id};
+    </update>
+    <parameterMap id="FilterDeleteResultMap" type="com.siskin.entity.RegexFilterRules">
+        <parameter  jdbcType="INTEGER" property="rfr_id"/>
+        <parameter  jdbcType="VARCHAR" property="field_name"/>
+        <parameter  jdbcType="VARCHAR" property="regex_rule"/>
+    </parameterMap>
+    <delete id="deleteFilter" parameterMap="FilterDeleteResultMap">
+        delete from regex_filter_rules where rfr_id=#{rfr_id};
+    </delete>
+</mapper>

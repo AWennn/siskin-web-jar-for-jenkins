@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siskin.mapper.SpiderLinkMapper">
+    <resultMap id="ResultMap" type="com.siskin.entity.SpiderLink">
+        <result column="serverAddress" jdbcType="VARCHAR" property="serverAddress"/>
+        <result column="statistic_count" jdbcType="VARCHAR" property="statistic_count"/>
+        <result column="statistic_time" jdbcType="TIMESTAMP" property="statistic_time"/>
+    </resultMap>
+    <select id="getSpiderData" resultMap="ResultMap">
+        select
+            serverAddress,
+            sum(statistic_count) as statistic_count,
+            statistic_time
+        from spider_link_statistic
+        where serverAddress = #{serverAddress} and
+            statistic_time between #{start_time} and #{end_time} and
+            request like concat(concat('%',#{request}),'%')
+        group by serverAddress,statistic_time;
+    </select>
+</mapper>
