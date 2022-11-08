@@ -23,7 +23,7 @@ public class SpiderLinkController {
     @Autowired
     SpiderLinkService spiderLinkService;
 
-    @RequestMapping(value = "/getSpiderData",method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/getSpiderData")
     public String getSpiderData(@RequestBody SpiderLink spiderLink) throws ParseException {
 
         SimpleDateFormat SpiderLinks = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

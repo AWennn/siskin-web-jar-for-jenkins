@@ -20,8 +20,8 @@ public class LinkController {
     @Autowired
     LinkService linkService;
 
-    @RequestMapping(value = "/getData",method = RequestMethod.POST, produces = "application/json")
-    public String getData(@RequestBody(required=false) Link link) throws ParseException {
+    @RequestMapping(value = "/getData")
+    public String getData(@RequestBody Link link) throws ParseException {
 
         SimpleDateFormat links = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date startDate = links.parse(link.getStart_time());
