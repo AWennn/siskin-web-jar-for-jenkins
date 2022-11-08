@@ -30,14 +30,14 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        synchronizeController.synchronizeData();
-        flinkRestApiController.runETLJob();
-        Set<Object> keys = stringRedisTemplate.opsForHash().keys("spider-identified-rules");
-        List<Object> reslut = new ArrayList<>(keys);
-        for (Object key : reslut) {
-            String string = key.toString();
-            flinkRestApiController.runRuleJob(Integer.valueOf(string));
-        }
+//        synchronizeController.synchronizeData();
+//        flinkRestApiController.runETLJob();
+//        Set<Object> keys = stringRedisTemplate.opsForHash().keys("spider-identified-rules");
+//        List<Object> reslut = new ArrayList<>(keys);
+//        for (Object key : reslut) {
+//            String string = key.toString();
+//            flinkRestApiController.runRuleJob(Integer.valueOf(string));
+//        }
 
     }
 }
