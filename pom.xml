@@ -78,7 +78,6 @@
             <groupId>org.esni</groupId>
             <artifactId>flink-rest-api</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <systemPath>/usr/local/jdk/siskin-web-jar-for-jenkins/lib</systemPath>
         </dependency>
     </dependencies>
 
@@ -87,16 +86,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <includeSystemScope>true</includeSystemScope>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
