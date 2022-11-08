@@ -5,10 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.siskin.entity.Link;
 import com.siskin.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +20,7 @@ public class LinkController {
     @Autowired
     LinkService linkService;
 
-    @PostMapping("/getData")
+    @RequestMapping(value = "/getData",method = RequestMethod.POST, produces = "application/json")
     public String getData(@RequestBody(required=false) Link link) throws ParseException {
 
         SimpleDateFormat links = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

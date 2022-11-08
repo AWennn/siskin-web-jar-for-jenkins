@@ -7,6 +7,7 @@ import com.siskin.service.SpiderLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
@@ -22,7 +23,7 @@ public class SpiderLinkController {
     @Autowired
     SpiderLinkService spiderLinkService;
 
-    @RequestMapping("/getSpiderData")
+    @RequestMapping(value = "/getSpiderData",method = RequestMethod.POST, produces = "application/json")
     public String getSpiderData(@RequestBody SpiderLink spiderLink) throws ParseException {
 
         SimpleDateFormat SpiderLinks = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
