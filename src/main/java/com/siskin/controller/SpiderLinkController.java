@@ -50,16 +50,5 @@ public class SpiderLinkController {
         return json.toJSONString();
     }
 
-//    @RequestMapping("/terminate")
-//    public void terminate() {
-//
-//        int ruleId = 0;
-//        terminate(ruleId);
-//
-//    }
-//
-//    public void terminate(int Id) {
-//        // ..
-//    }
 
 }
