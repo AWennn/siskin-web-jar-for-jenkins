@@ -60,7 +60,11 @@ public class FlinkRestApiController {
         }
         // start
         api.runJar(jar.getId(), "org.esni.siskin_core.app.IdentifiedRuleApplication", PARALLELISM, String.valueOf(ruleId));
-        message = "run successfully";
+        if (isNameExistInJobs(api, JOB_NAME + ruleId)) {
+            message = "run successfully";
+        }else {
+            message = "run Failed";
+        }
         return message;
     }
 
