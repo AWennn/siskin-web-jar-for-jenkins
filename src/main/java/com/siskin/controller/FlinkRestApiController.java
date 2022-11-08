@@ -49,11 +49,11 @@ public class FlinkRestApiController {
         if (!hasJar) {
             api.uploadJar(JAR_PATH);
         }
+        Jar jar = getJarByName(api, JAR_NAME);
         if(!isNameExistInJobs(api,ETL_NAME)){
-            runETLJob();
+            api.runJar(jar.getId(),"org.esni.siskin_core.app.ETLApplication",PARALLELISM);
         }
         // 判断rule是否运行
-        Jar jar = getJarByName(api, JAR_NAME);
         if (isNameExistInJobs(api, JOB_NAME + ruleId)) {
             // close
             terminate(ruleId);
@@ -122,6 +122,9 @@ public class FlinkRestApiController {
             }
         }).collect(Collectors.toList()).contains(name);
     }
+
+
+
 
     public void terminate(int ruleId){
         FlinkRestAPI api = FlinkRestAPI.create(FLINK_REST_URL);
