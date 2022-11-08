@@ -7,6 +7,7 @@ import org.esni.flink.rest.api.bean.Job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,11 +48,14 @@ public class SpiderIdentifiedRulesController {
     }
 
     @PutMapping("/updateSpider")
-    public String updateSpider(@RequestBody SpiderIdentifiedRules spider,Integer ruleId){
+    public String updateSpider(@RequestBody SpiderIdentifiedRules spider){
         try {
+            Integer ruleId = spider.getSir_id();
             terminate(ruleId);
+            Map<String,Integer> params = new HashMap<>();
+            params.put("ruleId",ruleId);
             message = spiderIdentifiedRulesService.updateSpider(spider) == 1?"Succeeded":"Does not exist,Failed";
-            flinkRestApiController.runRuleJob(ruleId);
+            flinkRestApiController.runRuleJob(params);
         }catch (Exception exception){
             message = "Abnormal";
         }
@@ -59,9 +63,10 @@ public class SpiderIdentifiedRulesController {
     }
 
     @DeleteMapping("/deleteSpider")
-    public String deleteSpider(@RequestBody SpiderIdentifiedRules spider,Map<String,Integer> map){
+    public String deleteSpider(@RequestBody SpiderIdentifiedRules spider){
         try {
-            terminate(map.get("ruleId"));
+            Integer ruleId = spider.getSir_id();
+            terminate(ruleId);
             message = spiderIdentifiedRulesService.deleteSpider(spider) == 1?"Succeeded":"Failed";
         }catch (Exception exception){
             message = "Failed";

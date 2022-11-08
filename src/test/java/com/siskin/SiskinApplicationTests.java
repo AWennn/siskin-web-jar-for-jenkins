@@ -85,20 +85,20 @@ class SiskinApplicationTests {
 
 
     @Test
-    public void testGetHash(){
-        Set<Object> keys = stringRedisTemplate.opsForHash().keys("spider-identified-rules");
+//    public void testGetHash(){
+//        Set<Object> keys = stringRedisTemplate.opsForHash().keys("spider-identified-rules");
+//
+//        List<Object> reslut = new ArrayList<>(keys);
+//        for (Object key : reslut) {
+//            String string = key.toString();
+//            flinkRestApiController.runRuleJob(Integer.valueOf(string));
+//        }
+////        reslut.forEach(System.out::println);
+////        List<Object> values = stringRedisTemplate.opsForHash().values("regex-filter-rules");
+////        values.forEach(System.out::println);
+//    }
 
-        List<Object> reslut = new ArrayList<>(keys);
-        for (Object key : reslut) {
-            String string = key.toString();
-            flinkRestApiController.runRuleJob(Integer.valueOf(string));
-        }
-//        reslut.forEach(System.out::println);
-//        List<Object> values = stringRedisTemplate.opsForHash().values("regex-filter-rules");
-//        values.forEach(System.out::println);
-    }
 
-    @Test
     public void testGetSpider(){
         List<SpiderIdentifiedRules> spider = spiderIdentifiedRulesMapper.getSpider();
         for (SpiderIdentifiedRules spiderIdentifiedRules : spider) {

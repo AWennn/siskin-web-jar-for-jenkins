@@ -32,8 +32,9 @@ public class FlinkRestApiController {
 
 
 
-    @RequestMapping("/runRuleJob/{ruleId}")
-    public String runRuleJob(@PathVariable Integer ruleId){
+    @RequestMapping("/runRuleJob")
+    public String runRuleJob(@PathVariable  Map<String,Integer> params){
+        Integer ruleId = params.get("ruleId");
         String message = "";
         FlinkRestAPI api = FlinkRestAPI.create(FLINK_REST_URL);
         List<Jar> jars = api.getJars();
