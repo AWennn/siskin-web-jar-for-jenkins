@@ -3,11 +3,13 @@ package com.siskin.controller;
 import org.esni.flink.rest.api.FlinkRestAPI;
 import org.esni.flink.rest.api.bean.Jar;
 import org.esni.flink.rest.api.bean.Job;
+import org.esni.flink.rest.api.bean.State;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.siskin.config.SiskinWebConfig.*;
@@ -50,8 +52,8 @@ public class FlinkRestApiController {
             api.uploadJar(JAR_PATH);
         }
         Jar jar = getJarByName(api, JAR_NAME);
-        if(!isNameExistInJobs(api,ETL_NAME)){
-            api.runJar(jar.getId(),"org.esni.siskin_core.app.ETLApplication",PARALLELISM);
+        if(!isNameRunInJob(api, ETL_NAME)){
+            runETLJob();
         }
         // 判断rule是否运行
         if (isNameExistInJobs(api, JOB_NAME + ruleId)) {
@@ -123,7 +125,27 @@ public class FlinkRestApiController {
         }).collect(Collectors.toList()).contains(name);
     }
 
+    public boolean isNameRunInJob(FlinkRestAPI api, String name){
 
+        return api.getJobs().stream().map(new Function<Job, Job>() {
+            @Override
+            public Job apply(Job job) {
+                Job richJob = api.getJob(job.getJid());
+                if (richJob == null) return new Job();
+                return richJob;
+            }
+        }).filter(new Predicate<Job>() {
+            @Override
+            public boolean test(Job job) {
+                return State.RUNNING.toString().equals(job.getState().toString());
+            }
+        }).map(new Function<Job, String>() {
+            @Override
+            public String apply(Job job) {
+                return job.getName();
+            }
+        }).collect(Collectors.toList()).contains(name);
+    }
 
 
     public void terminate(int ruleId){
